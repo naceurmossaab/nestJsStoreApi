@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppRoutingModule } from './app-routing.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({envFilePath: '.env', isGlobal: true}),
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -16,9 +15,10 @@ import { AppService } from './app.service';
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true
-    })
+    }),
+    AppRoutingModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule { }
