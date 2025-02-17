@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppRoutingModule } from './app-routing.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
       autoLoadEntities: true,
       synchronize: true
     }),
-    AppRoutingModule
+    AppRoutingModule,
+    UsersModule
   ],
   controllers: [],
   providers: [],
