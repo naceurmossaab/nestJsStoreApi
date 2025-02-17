@@ -15,7 +15,21 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
-  const config = new DocumentBuilder().setTitle('ERP Cloud').setVersion('1.0').build();
+  const config = new DocumentBuilder()
+    .setTitle('Store API')
+    .setVersion('1.0')
+    .addBearerAuth(
+      {
+        description: `Enter token in format: Bearer <JWT>`,
+        name: 'Authorization',
+        bearerFormat: 'Bearer',
+        scheme: 'Bearer',
+        type: 'http',
+        in: 'Header'
+      },
+      // This name here is important for matching up with @ApiBearerAuth() in your controller!
+      'access-token',
+    ).build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('', app, document, { swaggerOptions: { tagsSorter: 'alpha', operationsSorter: 'alpha' } });
 

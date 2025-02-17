@@ -23,11 +23,11 @@ export class UsersService implements IUserService {
     return this.userRepository.findOne({ where: { id } });
   }
 
-  findbyLogin(login: string): Promise<UsersEntity | null> {
+  findByLogin(login: string): Promise<UsersEntity | null> {
     return this.userRepository.findOne({ where: { login } });
   }
 
-  findbyEmail(email: string): Promise<UsersEntity | null> {
+  findByEmail(email: string): Promise<UsersEntity | null> {
     return this.userRepository.findOne({ where: { email } });
   }
 

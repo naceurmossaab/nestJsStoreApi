@@ -1,11 +1,17 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Inject, Param, ParseIntPipe, Patch, Post, UseFilters } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { Routes, Services } from '../utils/constants';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Inject, Param, ParseIntPipe, Patch, Post, UseFilters, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Role, Routes, Services } from '../utils/constants';
 import { HttpExceptionFilter } from '../utils/http-exception.filter';
 import { IUserService } from './users.interface';
 import { CreateUserDto, UpdateUserDto } from './dtos';
+import { Roles } from '../auth/guards/role.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/role.guard';
 
 @ApiTags(Routes.USERS)
+@ApiBearerAuth('access-token')
+@Roles(Role.ADMIN)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @UseFilters(new HttpExceptionFilter())
 @Controller(Routes.USERS)
 export class UsersController {
@@ -18,7 +24,7 @@ export class UsersController {
       const { password, ...safeUser } = user;
       return safeUser;
     } catch (error) {
-      throw new HttpException(error.sqlMessage, error.status);
+      throw new HttpException(error.sqlMessage, error.code | 400);
     }
   }
 
