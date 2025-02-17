@@ -1,6 +1,6 @@
-import { UsersEntity } from "../users/users.entity";
+import { User } from "../users/users.entity";
 
 export interface IAuthService {
-  validate(email: string, password: string): Promise<UsersEntity>;
+  validate(email: string, password: string): Promise<User>;
   login(user: any): any;
 }

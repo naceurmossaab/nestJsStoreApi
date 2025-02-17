@@ -3,7 +3,7 @@ import * as bcrypt from 'bcrypt';
 import { Role } from "../utils/constants";
 
 @Entity({ name: 'users' })
-export class UsersEntity {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 

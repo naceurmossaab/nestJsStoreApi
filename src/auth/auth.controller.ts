@@ -1,5 +1,5 @@
 import { Body, Controller, HttpException, Inject, Post, UseFilters, UseGuards, Request } from '@nestjs/common';
-import { Routes, Services } from '../utils/constants';
+import { Services } from '../utils/constants';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { HttpExceptionFilter } from '../utils/http-exception.filter';
 import { IUserService } from '../users/users.interface';
@@ -8,9 +8,9 @@ import { CreateUserDto } from '../users/dtos';
 import { LoginDto } from './dto/login.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
-@ApiTags(Routes.AUTH)
+@ApiTags()
 @UseFilters(new HttpExceptionFilter())
-@Controller(Routes.AUTH)
+@Controller()
 export class AuthController {
   constructor(
     @Inject(Services.USERS) private readonly userService: IUserService,

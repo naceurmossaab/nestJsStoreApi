@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { IAuthService } from './auth.interface';
-import { UsersEntity } from '../users/users.entity';
+import { User } from '../users/users.entity';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { Services } from '../utils/constants';
@@ -13,7 +13,7 @@ export class AuthService implements IAuthService {
     @Inject(Services.USERS) private readonly userService: IUserService,
   ) { }
 
-  async validate(email: string, password: string): Promise<UsersEntity> {
+  async validate(email: string, password: string): Promise<User> {
     let user = await this.userService.findByEmail(email);
     if (!user) {
       user = await this.userService.findByLogin(email);
