@@ -35,6 +35,8 @@ export class ProductsController {
   @ApiQuery({ name: 'maxPrice', required: false, type: Number, description: 'Maximum price range' })
   @ApiQuery({ name: 'minPrice', required: false, type: Number, description: 'Minimum price range' })
   @ApiQuery({ name: 'category', required: false, type: String, description: 'Filter by category' })
+  @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Limit per page' })
+  @ApiQuery({ name: 'page', required: false, type: Number, description: 'Page number' })
   @ApiQuery({ name: 'name', required: false, type: String, description: 'Search by product name' })
   findAll(@Query() query: any) {
     return this.productService.findAll(query);
