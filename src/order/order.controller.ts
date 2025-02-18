@@ -1,5 +1,5 @@
-import { Controller, Post, Get, Param, Body, Inject, Req, HttpException, HttpStatus, UseFilters, UseGuards } from '@nestjs/common';
-import { Services } from '../utils/constants';
+import { Controller, Post, Get, Param, Body, Inject, Req, HttpException, HttpStatus, UseFilters, UseGuards, Patch } from '@nestjs/common';
+import { OrderStatus, Services } from '../utils/constants';
 import { IUserService } from '../users/users.interface';
 import { IProductService } from '../products/products.interface';
 import { IOrderService } from './order.interface';
@@ -35,6 +35,14 @@ export class OrderController {
     }
 
     return { message: 'Order placed successfully', orderId: order.id, total: totalPrice };
+  }
+
+  @Patch(':orderId/status')
+  async updateOrderStatus(@Param('orderId') orderId: number, @Body('status') status: OrderStatus) {
+    const order = await this.orderService.getOrderDetails(orderId);
+    if (!order) throw new HttpException(`Order with ID ${orderId} not found`, HttpStatus.NOT_FOUND);
+    
+    return this.orderService.updateOrderStatus(order, status);
   }
 
   @Get('user/:userId')

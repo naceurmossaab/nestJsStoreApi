@@ -6,6 +6,7 @@ import { OrderItem } from './order-item.entity';
 import { User } from '../users/users.entity';
 import { Product } from '../products/products.entity';
 import { IOrderService } from './order.interface';
+import { OrderStatus } from '../utils/constants';
 
 @Injectable()
 export class OrderService implements IOrderService {
@@ -43,4 +44,10 @@ export class OrderService implements IOrderService {
       relations: ['items', 'items.product', 'user'],
     });
   }
+
+  async updateOrderStatus(order: Order, status: OrderStatus): Promise<Order> {
+    order.status = status;
+    return await this.orderRepository.save(order);
+  }
+
 }

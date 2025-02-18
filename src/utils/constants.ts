@@ -3,6 +3,12 @@ export enum Role {
   ADMIN = 'admin',
 }
 
+export enum OrderStatus {
+  PENDING = 'pending',
+  SHIPPED = 'shipped',
+  DELIVERED = 'delivered'
+}
+
 export enum Services {
   AUTH = "auth",
   USERS = "users",
