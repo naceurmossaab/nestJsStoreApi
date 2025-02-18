@@ -1,6 +1,7 @@
-import { BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
 import { Role } from "../utils/constants";
+import { Cart } from "../cart/cart.entity";
 
 @Entity({ name: 'users' })
 export class User {
@@ -18,6 +19,10 @@ export class User {
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role;
+
+  @OneToOne(() => Cart, (cart) => cart.user, { cascade: true })
+  @JoinColumn()
+  cart: Cart;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
   createdAt: Date;

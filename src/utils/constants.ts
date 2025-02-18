@@ -7,4 +7,5 @@ export enum Services {
   AUTH = "auth",
   USERS = "users",
   PRODUCTS = "products",
+  CART = "cart",
 }

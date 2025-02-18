@@ -9,5 +9,6 @@ import { Services } from '../utils/constants';
   imports: [TypeOrmModule.forFeature([Product])],
   controllers: [ProductsController],
   providers: [{ provide: Services.PRODUCTS, useClass: ProductsService }],
+  exports: [{ provide: Services.PRODUCTS, useClass: ProductsService }],
 })
 export class ProductsModule { }
