@@ -2,6 +2,7 @@ import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, 
 import * as bcrypt from 'bcrypt';
 import { Role } from "../utils/constants";
 import { Cart } from "../cart/cart.entity";
+import { Wishlist } from "../wishlist/wishlist.entity";
 
 @Entity({ name: 'users' })
 export class User {
@@ -23,6 +24,9 @@ export class User {
   @OneToOne(() => Cart, (cart) => cart.user, { cascade: true })
   @JoinColumn()
   cart: Cart;
+
+  @OneToMany(() => Wishlist, (wishlist) => wishlist.user)
+  wishlist: Wishlist[];
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
   createdAt: Date;

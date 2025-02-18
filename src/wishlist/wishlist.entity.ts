@@ -1,20 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Cart } from './cart.entity';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { User } from '../users/users.entity';
 import { Product } from '../products/products.entity';
 
 @Entity()
-export class CartItem {
+export class Wishlist {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Cart, (cart) => cart.items, { onDelete: 'CASCADE' })
-  cart: Cart;
+  @ManyToOne(() => User, (user) => user.wishlist, { onDelete: 'CASCADE' })
+  user: User;
 
-  @ManyToOne(() => Product, { eager: true })
+  @ManyToOne(() => Product, (product) => product.wishlist, { onDelete: 'CASCADE' })
   product: Product;
-
-  @Column()
-  quantity: number;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
   createdAt: Date;
