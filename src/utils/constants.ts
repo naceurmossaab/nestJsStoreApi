@@ -9,4 +9,5 @@ export enum Services {
   PRODUCTS = "products",
   CART = "cart",
   WISHLIST = "wishlist",
+  ORDER = "order",
 }

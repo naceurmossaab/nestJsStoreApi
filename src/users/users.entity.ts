@@ -3,6 +3,7 @@ import * as bcrypt from 'bcrypt';
 import { Role } from "../utils/constants";
 import { Cart } from "../cart/cart.entity";
 import { Wishlist } from "../wishlist/wishlist.entity";
+import { Order } from "../order/order.entity";
 
 @Entity({ name: 'users' })
 export class User {
@@ -27,6 +28,9 @@ export class User {
 
   @OneToMany(() => Wishlist, (wishlist) => wishlist.user)
   wishlist: Wishlist[];
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
   createdAt: Date;

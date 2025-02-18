@@ -8,6 +8,7 @@ import { ProductsModule } from './products/products.module';
 import { CartModule } from './cart/cart.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { WishlistModule } from './wishlist/wishlist.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { WishlistModule } from './wishlist/wishlist.module';
     ProductsModule,
     CartModule,
     WishlistModule,
+    OrderModule,
     NotificationsModule
   ],
   controllers: [],
